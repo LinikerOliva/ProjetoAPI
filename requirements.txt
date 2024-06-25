@@ -1,0 +1,5 @@
+Flask
+Flask-MySQLDB
+Flask-Cors
+Werkzeug
+Flask-JWT-Extended

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: mysql-database
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'cinema_app'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    networks: 
+      - api-network
+
+  web:
+    build: .
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app
+    networks: 
+        - api-network
+
+volumes:
+  mariadb_data:
+
+networks:
+  api-network:
+    driver: bridge
